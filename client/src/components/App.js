@@ -5,7 +5,7 @@ import animal1 from '../images/animal1.jpg';
 
 class App extends Component {
     componentDidMount() {
-        fetch('/getdata')
+        fetch('/getallanimals')
             .then(res => res.json())
             .then(
                 result => {
@@ -54,7 +54,7 @@ class App extends Component {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
 
-                    <a href="/getdata">Get some data</a>
+                    <a href="/getallanimals">Get some data</a>
                 </header>
                 <div>
                     <img src={animal1} className="App-logo" alt="logo" style={{width: '200px'}}/>
