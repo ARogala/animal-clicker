@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import logo from '../click.svg';
 import animal1 from '../images/animal1.jpg';
-// import animal2 from '../images/animal2.jpg';
+import animal2 from '../images/animal2.jpg';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            voteCountA1: 0,
+            voteCountA2: 0
+        };
+    }
+
     componentDidMount() {
         fetch('/getallanimals')
             .then(res => res.json())
@@ -15,51 +23,50 @@ class App extends Component {
                     console.log(error);
                 }
             );
-
-        // var req = require.context("../images", true, /.*\.jpg$/);
-
-        // console.log(typeof req);
-        // console.log(req);
-        // console.log(req.keys());
-        // // console.log(req.keys());
-        // const regex1 = new RegExp(/\.\//,'gi');
-        // const regex2 = new RegExp(`animal`, 'gi');
-        // const regex3 = new RegExp(regex1.source + regex2.source, 'gi');
-
-        // const filteredKeys = req.keys().filter(key => key.match(regex3));
-        // console.log(filteredKeys);
-        // //pass the key back into require to get the import
-        // console.log(req(req.keys()[0]));
-        // req.keys().forEach(function(key){
-        //     req(key);
-        //     console.log(req(key));
-        // });
     }
-    count(string) {
-        console.log(typeof string)
-        fetch('/vote',{method: 'PUT', body: JSON.stringify(string), headers:{'Content-Type': 'application/json'}})
+    vote(animalName) {
+        console.log(typeof animalName);
+        const body = JSON.stringify({ name: animalName });
+        fetch('/vote', { method: 'PUT', body: body, headers: { 'Content-Type': 'application/json' } })
             .then(res => res.json())
             .then(
                 result => {
                     console.log(result);
+                    this.updateVoteCount(result.clickCount, result.name);
                 },
                 error => {
                     console.log(error);
                 }
             );
     }
+
+    updateVoteCount(voteCount, animalName) {
+        if (animalName === 'animal1') {
+            this.setState({ voteCountA1: voteCount });
+        } else if (animalName === 'animal2') {
+            this.setState({ voteCountA2: voteCount });
+        }
+    }
+
     render() {
+        let voteCountA1 = this.state.voteCountA1;
+        let voteCountA2 = this.state.voteCountA2;
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-
-                    <a href="/getallanimals">Get some data</a>
                 </header>
                 <div>
-                    <img src={animal1} className="App-logo" alt="logo" style={{width: '200px'}}/>
+                    <img src={animal1} className="App-logo" alt="logo" style={{ width: '200px' }} />
 
-                    <button onClick={()=>this.count('animal1')}>Vote</button>
+                    <button onClick={() => this.vote('animal1')}>Vote</button>
+                    <p>Total Votes: {voteCountA1}</p>
+                </div>
+                <div>
+                    <img src={animal2} className="App-logo" alt="logo" style={{ width: '200px' }} />
+
+                    <button onClick={() => this.vote('animal2')}>Vote</button>
+                    <p>Total Votes: {voteCountA2}</p>
                 </div>
             </div>
         );
