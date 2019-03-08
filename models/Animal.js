@@ -13,5 +13,7 @@ const AnimalSchema = new Schema({
 });
 
 const Animal = mongoose.model('animal', AnimalSchema);
+const WeeklyAnimal = mongoose.model('weeklyanimal', AnimalSchema);
 
-module.exports = Animal;
+module.exports.Animal = Animal;
+module.exports.WeeklyAnimal = WeeklyAnimal;
