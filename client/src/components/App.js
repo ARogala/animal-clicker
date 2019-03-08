@@ -64,13 +64,13 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                 </header>
                 <div>
-                    <img src={animal1} className="App-logo" alt="logo" style={{ width: '200px' }} />
+                    <img src={animal1} className="App-logo" alt="logo" style={{ width: '400px' }} />
 
                     <button onClick={() => this.vote('animal1')}>Vote</button>
                     <p>Total Votes: {voteCountA1}</p>
                 </div>
                 <div>
-                    <img src={animal2} className="App-logo" alt="logo" style={{ width: '200px' }} />
+                    <img src={animal2} className="App-logo" alt="logo" style={{ width: '400px' }} />
 
                     <button onClick={() => this.vote('animal2')}>Vote</button>
                     <p>Total Votes: {voteCountA2}</p>
