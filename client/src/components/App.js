@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import logo from '../click.svg';
-import animal1 from '../images/animal1.jpg';
-import animal2 from '../images/animal2.jpg';
+import animal1 from '../images/animal15.jpg';
+import animal2 from '../images/animal16.jpg';
+import animal3 from '../images/animal35.jpg';
+import animal4 from '../images/animal30.jpg';
+import animal5 from '../images/animal32.jpg';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            voteCountA1: 0,
-            voteCountA2: 0
+            animals: []
         };
     }
 
@@ -17,22 +19,15 @@ class App extends Component {
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result);
-                    for (let i = 0; i < result.length; i++) {
-                        if (result[i].name === 'animal1') {
-                            this.setState({ voteCountA1: result[i].clickCount });
-                        } else if (result[i].name === 'animal2') {
-                            this.setState({ voteCountA2: result[i].clickCount });
-                        }
-                    }
+                    this.setState({ animals: result });
                 },
                 error => {
                     console.log(error);
                 }
             );
     }
+    
     vote(animalName) {
-        console.log(typeof animalName);
         const body = JSON.stringify({ name: animalName });
         fetch('/vote', { method: 'PUT', body: body, headers: { 'Content-Type': 'application/json' } })
             .then(res => res.json())
@@ -48,33 +43,62 @@ class App extends Component {
     }
 
     updateVoteCount(voteCount, animalName) {
-        if (animalName === 'animal1') {
-            this.setState({ voteCountA1: voteCount });
-        } else if (animalName === 'animal2') {
-            this.setState({ voteCountA2: voteCount });
+        let animals = this.state.animals;
+        for(let i = 0; i < animals.length; i++ ) {
+            if(animals[i].name === animalName) {
+                animals[i].clickCount = voteCount;
+            }
         }
+        this.setState({animals: animals});
     }
 
     render() {
-        let voteCountA1 = this.state.voteCountA1;
-        let voteCountA2 = this.state.voteCountA2;
+        console.log(this.state.animals);
+        let animals = this.state.animals;
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                 </header>
-                <div>
-                    <img src={animal1} className="App-logo" alt="logo" style={{ width: '400px' }} />
+                {animals.length === 0 ? (
+                    <div>Fetching Animals...</div>
+                ) : (
+                    <div>
+                        <div>
+                            <img src={animal1} className="App-logo" alt="logo" style={{ width: '400px' }} />
 
-                    <button onClick={() => this.vote('animal1')}>Vote</button>
-                    <p>Total Votes: {voteCountA1}</p>
-                </div>
-                <div>
-                    <img src={animal2} className="App-logo" alt="logo" style={{ width: '400px' }} />
+                            <button onClick={() => this.vote(animals[0].name)}>Vote</button>
+                            <p>Total Votes: {animals[0].clickCount}</p>
+                        </div>
+                        <div>
+                            <img src={animal2} className="App-logo" alt="logo" style={{ width: '400px' }} />
 
-                    <button onClick={() => this.vote('animal2')}>Vote</button>
-                    <p>Total Votes: {voteCountA2}</p>
-                </div>
+                            <button onClick={() => this.vote(animals[1].name)}>Vote</button>
+                            <p>Total Votes: {animals[1].clickCount}</p>
+                        </div>
+
+                        <div>
+                            <img src={animal3} className="App-logo" alt="logo" style={{ width: '400px' }} />
+
+                            <button onClick={() => this.vote(animals[2].name)}>Vote</button>
+                            <p>Total Votes: {animals[2].clickCount}</p>
+                        </div>
+
+                        <div>
+                            <img src={animal4} className="App-logo" alt="logo" style={{ width: '400px' }} />
+
+                            <button onClick={() => this.vote(animals[3].name)}>Vote</button>
+                            <p>Total Votes: {animals[3].clickCount}</p>
+                        </div>
+
+                        <div>
+                            <img src={animal5} className="App-logo" alt="logo" style={{ width: '400px' }} />
+
+                            <button onClick={() => this.vote(animals[4].name)}>Vote</button>
+                            <p>Total Votes: {animals[4].clickCount}</p>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
