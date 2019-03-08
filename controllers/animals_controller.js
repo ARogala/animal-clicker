@@ -9,7 +9,7 @@ module.exports = {
 		});
 	},
 	getAllAnimals: function(req, res) {
-		Animal.find({}).then(animals => {
+		Animal.find({ name: { $in: ['animal1', 'animal2'] } }).then(animals => {
 			console.log(typeof animals);
 			// res.send(JSON.stringify(animals));
 			res.json(animals);
