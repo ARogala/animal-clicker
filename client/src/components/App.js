@@ -18,6 +18,13 @@ class App extends Component {
             .then(
                 result => {
                     console.log(result);
+                    for (let i = 0; i < result.length; i++) {
+                        if (result[i].name === 'animal1') {
+                            this.setState({ voteCountA1: result[i].clickCount });
+                        } else if (result[i].name === 'animal2') {
+                            this.setState({ voteCountA2: result[i].clickCount });
+                        }
+                    }
                 },
                 error => {
                     console.log(error);
