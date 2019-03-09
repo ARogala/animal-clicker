@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import AnimalVotes from './AnimalVotes';
 import Winners from './Winners';
+import About from './About';
 
 import logo from '../click.svg';
 
@@ -31,7 +32,7 @@ class App extends Component {
                         <h2>This weeks cutest animals!</h2>
                     </header>
                     <Route exact path="/" render={() => <Winners />} />
-                    <Route path="/about" render={() => <div>About</div>} />
+                    <Route path="/about" render={() => <About />} />
                 </div>
             );
         } else if (day !== 0) {
@@ -51,7 +52,7 @@ class App extends Component {
                         <h2>Vote for your favorites!</h2>
                     </header>
                     <Route exact path="/" render={() => <AnimalVotes />} />
-                    <Route path="/about" render={() => <div>About</div>} />
+                    <Route path="/about" render={() => <About />} />
                 </div>
             );
         }
