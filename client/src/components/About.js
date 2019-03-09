@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
 	return (
-		<div>
+		<div className="about">
 			<h3>About</h3>
 			<p>
 				Animal clicker is a simple but fun game! Every Monday a new set of five animals will be pulled from the database
