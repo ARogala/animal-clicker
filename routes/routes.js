@@ -5,5 +5,7 @@ module.exports = app => {
 
 	app.get('/getallanimals', AnimalsController.getAllAnimals);
 
+	app.get('/getwinners', AnimalsController.getWinners);
+
 	app.put('/vote', AnimalsController.vote)
 }
