@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.loader {
+	p {
+		text-align: center;
+	}
+	
+	&__div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
 // button styles for all app buttons. I know think components not inheritance
 // but this is too easy 
 .appBtnContainer {

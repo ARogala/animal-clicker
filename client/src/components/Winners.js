@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader-spinner';
 
 import getImageImportPaths from '../importPaths';
 
@@ -18,7 +19,7 @@ class Winners extends React.Component {
 				result => {
 					this.setState({ animals: result });
 					const imagePaths = getImageImportPaths(result);
-					this.setState({imagePaths: imagePaths});
+					this.setState({ imagePaths: imagePaths });
 				},
 				error => {
 					console.log(error);
@@ -45,7 +46,16 @@ class Winners extends React.Component {
 		let animals = this.state.animals;
 		let imagePaths = this.state.imagePaths;
 		if (animals.length === 0 && imagePaths.length === 0) {
-			return <div>Fetching Winners...</div>;
+			return (
+				<div className="loader">
+					<p>Getting Winners!</p>
+					<div className="loader__div">
+						<div>
+							<Loader type="Puff" color="#00BFFF" height="100" width="100" />
+						</div>
+					</div>
+				</div>
+			);
 		} else {
 			return <div>{this.renderWinners(animals, imagePaths)}</div>;
 		}

@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         const dateNow = new Date();
         const day = dateNow.getDay();
-        //const day = 0;
+        // const day = 0;
         // console.log(day);
         //display winners on Sunday
         if (day === 0) {

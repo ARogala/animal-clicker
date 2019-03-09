@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader-spinner';
 
 import getImageImportPaths from '../importPaths';
 
@@ -60,8 +61,10 @@ class AnimalVotes extends React.Component {
 					</div>
 					<p>Total Votes: {animal.clickCount}</p>
 					<div className="appBtnContainer">
-						<button className="appBtn" onClick={() => this.vote(animal.name)}>Vote</button>
-					</div>	
+						<button className="appBtn" onClick={() => this.vote(animal.name)}>
+							Vote
+						</button>
+					</div>
 				</div>
 			);
 		});
@@ -72,9 +75,17 @@ class AnimalVotes extends React.Component {
 		//console.log(this.state.animals);
 		let animals = this.state.animals;
 		let imagePaths = this.state.imagePaths;
-
 		if (animals.length === 0 && imagePaths.length === 0) {
-			return <div>Fetching Animals...</div>;
+			return (
+				<div className="loader">
+					<p>Getting Animals!</p>
+					<div className="loader__div">
+						<div>
+							<Loader type="Puff" color="#00BFFF" height="100" width="100" />
+						</div>
+					</div>
+				</div>
+			);
 		} else {
 			return <div>{this.renderAnimals(animals, imagePaths)}</div>;
 		}
