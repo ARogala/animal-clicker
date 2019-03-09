@@ -87,53 +87,30 @@ class AnimalVotes extends React.Component {
 		this.setState({ animals: animals });
 	}
 
+	renderAnimals(animals, imagePaths) {
+		let animalDOM = animals.map((animal, index) => {
+			return (
+				<div key={index}>
+					<img src={imagePaths[index]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
+
+					<button onClick={() => this.vote(animal.name)}>Vote</button>
+					<p>Total Votes: {animal.clickCount}</p>
+				</div>
+			);
+		});
+		return animalDOM;
+	}
+
 	render() {
 		//console.log(this.state.animals);
 		let animals = this.state.animals;
 		let imagePaths = this.state.imagePaths;
-		return (
-			<div>
-				{animals.length === 0 && imagePaths.length === 0 ? (
-					<div>Fetching Animals...</div>
-				) : (
-					<div>
-						<div>
-							<img src={imagePaths[0]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
 
-							<button onClick={() => this.vote(animals[0].name)}>Vote</button>
-							<p>Total Votes: {animals[0].clickCount}</p>
-						</div>
-						<div>
-							<img src={imagePaths[1]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
-
-							<button onClick={() => this.vote(animals[1].name)}>Vote</button>
-							<p>Total Votes: {animals[1].clickCount}</p>
-						</div>
-
-						<div>
-							<img src={imagePaths[2]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
-
-							<button onClick={() => this.vote(animals[2].name)}>Vote</button>
-							<p>Total Votes: {animals[2].clickCount}</p>
-						</div>
-
-						<div>
-							<img src={imagePaths[3]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
-
-							<button onClick={() => this.vote(animals[3].name)}>Vote</button>
-							<p>Total Votes: {animals[3].clickCount}</p>
-						</div>
-
-						<div>
-							<img src={imagePaths[4]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
-
-							<button onClick={() => this.vote(animals[4].name)}>Vote</button>
-							<p>Total Votes: {animals[4].clickCount}</p>
-						</div>
-					</div>
-				)}
-			</div>
-		);
+		if (animals.length === 0 && imagePaths.length === 0) {
+			return <div>Fetching Animals...</div>;
+		} else {
+			return <div>{this.renderAnimals(animals, imagePaths)}</div>;
+		}
 	}
 }
 
