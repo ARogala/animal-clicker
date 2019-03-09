@@ -8,7 +8,8 @@ class AnimalVotes extends React.Component {
 		super(props);
 		this.state = {
 			animals: [],
-			imagePaths: []
+			imagePaths: [],
+			voting: false
 		};
 	}
 
@@ -28,6 +29,7 @@ class AnimalVotes extends React.Component {
 	}
 
 	vote(animalName) {
+		this.setState({ voting: true });
 		const body = JSON.stringify({ name: animalName });
 		fetch('/vote', { method: 'PUT', body: body, headers: { 'Content-Type': 'application/json' } })
 			.then(res => res.json())
@@ -35,9 +37,11 @@ class AnimalVotes extends React.Component {
 				result => {
 					//console.log(result);
 					this.updateVoteCount(result.clickCount, result.name);
+					this.setState({ voting: false });
 				},
 				error => {
 					console.log(error);
+					this.setState({ voting: false });
 				}
 			);
 	}
@@ -59,12 +63,25 @@ class AnimalVotes extends React.Component {
 					<div className="animal__img-div">
 						<img src={imagePaths[index]} className="animal__img" alt="animal" />
 					</div>
-					<p>Total Votes: {animal.clickCount}</p>
-					<div className="appBtnContainer">
-						<button className="appBtn" onClick={() => this.vote(animal.name)}>
-							Vote
-						</button>
-					</div>
+					{this.state.voting ? (
+						<div className="loader">
+							<p>Voting</p>
+							<div className="loader__div">
+								<div>
+									<Loader type="Puff" color="#00BFFF" height="50" width="50" />
+								</div>
+							</div>
+						</div>
+					) : (
+						<div>
+							<p>Total Votes: {animal.clickCount}</p>
+							<div className="appBtnContainer">
+								<button className="appBtn" onClick={() => this.vote(animal.name)}>
+									Vote
+								</button>
+							</div>
+						</div>
+					)}
 				</div>
 			);
 		});
