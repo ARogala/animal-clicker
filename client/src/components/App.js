@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import AnimalVotes from './AnimalVotes';
 import Winners from './Winners';
 
@@ -14,23 +17,41 @@ class App extends Component {
         if (day === 0) {
             return (
                 <div className="App">
+                    <nav className="nav">
+                        <Link to="/" className="nav__link">
+                            Home
+                        </Link>
+                        <Link to="/about" className="nav__link">
+                            About
+                        </Link>
+                    </nav>
                     <header className="App-header">
                         <img src={logo} className="App-logo" alt="logo" />
                         <h1>Animal Clicker</h1>
                         <h2>This weeks cutest animals!</h2>
                     </header>
-                    <Winners />
+                    <Route exact path="/" render={() => <Winners />} />
+                    <Route path="/about" render={() => <div>About</div>} />
                 </div>
             );
         } else if (day !== 0) {
             return (
                 <div className="App">
+                    <nav className="nav">
+                        <Link to="/" className="nav__link">
+                            Home
+                        </Link>
+                        <Link to="/about" className="nav__link">
+                            About
+                        </Link>
+                    </nav>
                     <header className="App-header">
                         <img src={logo} className="App-logo" alt="logo" />
                         <h1>Animal Clicker</h1>
                         <h2>Vote for your favorites!</h2>
                     </header>
-                    <AnimalVotes />
+                    <Route exact path="/" render={() => <AnimalVotes />} />
+                    <Route path="/about" render={() => <div>About</div>} />
                 </div>
             );
         }
