@@ -17,7 +17,7 @@ class App extends Component {
                     <header className="App-header">
                         <img src={logo} className="App-logo" alt="logo" />
                         <h1>Animal Clicker</h1>
-                        <h2>Vote for your favorites!</h2>
+                        <h2>This weeks cutest animals!</h2>
                     </header>
                     <Winners />
                 </div>
