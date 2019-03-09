@@ -54,11 +54,14 @@ class AnimalVotes extends React.Component {
 	renderAnimals(animals, imagePaths) {
 		let animalDOM = animals.map((animal, index) => {
 			return (
-				<div key={index}>
-					<img src={imagePaths[index]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
-
-					<button onClick={() => this.vote(animal.name)}>Vote</button>
+				<div className="animal" key={index}>
+					<div className="animal__img-div">
+						<img src={imagePaths[index]} className="animal__img" alt="animal" />
+					</div>
 					<p>Total Votes: {animal.clickCount}</p>
+					<div className="appBtnContainer">
+						<button className="appBtn" onClick={() => this.vote(animal.name)}>Vote</button>
+					</div>	
 				</div>
 			);
 		});

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.animal {
+	padding: 10px 0px 10px 0px;
+	&__img-div {
+		text-align: center;
+	}
+
+	&__img {
+		width: 90vw;
+		max-width: 500px;
+		border-radius: $border-radius-large;
+	}
+
+	p {
+		text-align: center;
+		font-weight: bold;
+	}
+}

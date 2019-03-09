@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         const dateNow = new Date();
         const day = dateNow.getDay();
-        // const day = 0;
+        //const day = 0;
         // console.log(day);
         //display winners on Sunday
         if (day === 0) {
@@ -26,8 +26,8 @@ class App extends Component {
                             About
                         </Link>
                     </nav>
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo" />
+                    <header className="header">
+                        <img src={logo} className="header__img" alt="logo" />
                         <h1>Animal Clicker</h1>
                         <h2>This weeks cutest animals!</h2>
                     </header>
@@ -46,8 +46,8 @@ class App extends Component {
                             About
                         </Link>
                     </nav>
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo" />
+                    <header className="header">
+                        <img src={logo} className="header__img" alt="logo" />
                         <h1>Animal Clicker</h1>
                         <h2>Vote for your favorites!</h2>
                     </header>

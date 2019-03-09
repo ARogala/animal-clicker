@@ -29,8 +29,10 @@ class Winners extends React.Component {
 	renderWinners(animals, imagePaths) {
 		let animalDOM = animals.map((animal, index) => {
 			return (
-				<div key={index}>
-					<img src={imagePaths[index]} className="App-logo" alt="logo" style={{ maxWidth: '400px' }} />
+				<div className="animal" key={index}>
+					<div className="animal__img-div">
+						<img src={imagePaths[index]} className="animal__img" alt="animal" />
+					</div>
 					<p>Total Votes: {animal.clickCount}</p>
 				</div>
 			);
