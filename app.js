@@ -27,6 +27,19 @@ function runServer() {
 	// const animal = new Animal({name: 'animal50', clickCount: 0});
 	// animal.save()
 	routes(app);
+
+	if (process.env.NODE_ENV === 'production') {
+		// express will serve up production assets
+		// like our main.js and main.css files from client build
+		app.use(express.static('client/build'));
+
+		// Express will serve up the index.html file
+		// if it doesnt recognize the route
+		const path = require('path');
+		app.get('*', (req, res) => {
+			res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+		});
+	}
 }
 
 //game reset logic should prob be done with a cron job
