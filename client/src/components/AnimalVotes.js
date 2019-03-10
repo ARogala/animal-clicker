@@ -9,7 +9,8 @@ class AnimalVotes extends React.Component {
 		this.state = {
 			animals: [],
 			imagePaths: [],
-			voting: false
+			voting: false,
+			error: false
 		};
 	}
 
@@ -24,6 +25,7 @@ class AnimalVotes extends React.Component {
 				},
 				error => {
 					console.log(error);
+					this.setState({ error: true });
 				}
 			);
 	}
@@ -42,6 +44,7 @@ class AnimalVotes extends React.Component {
 				error => {
 					console.log(error);
 					this.setState({ voting: false });
+					this.setState({ error: true });
 				}
 			);
 	}
@@ -92,7 +95,9 @@ class AnimalVotes extends React.Component {
 		//console.log(this.state.animals);
 		let animals = this.state.animals;
 		let imagePaths = this.state.imagePaths;
-		if (animals.length === 0 && imagePaths.length === 0) {
+		if (this.state.error) {
+			return <p>Sorry error has occurred and you landed on my Junior Developer Page! Please try back later.</p>;
+		} else if (animals.length === 0 && imagePaths.length === 0) {
 			return (
 				<div className="loader">
 					<p>Getting Animals!</p>

@@ -8,7 +8,8 @@ class Winners extends React.Component {
 		super(props);
 		this.state = {
 			animals: [],
-			imagePaths: []
+			imagePaths: [],
+			error: false
 		};
 	}
 
@@ -23,6 +24,7 @@ class Winners extends React.Component {
 				},
 				error => {
 					console.log(error);
+					this.setState({ error: true });
 				}
 			);
 	}
@@ -45,7 +47,9 @@ class Winners extends React.Component {
 		//console.log(this.state.animals);
 		let animals = this.state.animals;
 		let imagePaths = this.state.imagePaths;
-		if (animals.length === 0 && imagePaths.length === 0) {
+		if (this.state.error) {
+			return <p>Sorry error has occurred and you landed on my Junior Developer Page! Please try back later.</p>;
+		} else if (animals.length === 0 && imagePaths.length === 0) {
 			return (
 				<div className="loader">
 					<p>Getting Winners!</p>
