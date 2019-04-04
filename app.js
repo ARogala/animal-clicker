@@ -2,8 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const Animal = require('./models/Animal').Animal;
-const ResetGame = require('./models/ResetGame');
 const routes = require('./routes/routes');
 const keys = require('./config/keys');
 const app = express();
