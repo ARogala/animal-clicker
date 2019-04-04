@@ -10,8 +10,9 @@ mongoose.connection
 	})
 	.on('error', error => {
 		console.warn('Warning', error);
+		process.exit();
 	});
-
+// script is run with https://devcenter.heroku.com/articles/scheduler
 function gameReset() {
 	let dateNow = new Date();
 	let day = dateNow.getDay();
